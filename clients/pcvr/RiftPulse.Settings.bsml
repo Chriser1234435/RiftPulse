@@ -1,0 +1,34 @@
+<bg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://monkeymanboy.github.io/BSML-Docs/BSMLSchema.xsd">
+  <vertical spacing="1">
+    <text text="RiftPulse — Streaming Suite" />
+    <text text="Module controls are in-game. Settings are stored locally in UserData/RiftPulse/config.json." />
+    <text text="Development build: toggles record your preference only; streaming handlers are not released yet." />
+
+    <text text="CHAT AND MODERATION" />
+    <toggle-setting value="chat-enabled" text="Unified Chat" />
+    <toggle-setting value="word-filter-enabled" text="WordFilter" />
+    <toggle-setting value="font-filter-enabled" text="FontFilter" />
+    <toggle-setting value="anti-spam-enabled" text="AntiSpam" />
+    <toggle-setting value="chatbot-enabled" text="Chatbot Commands" />
+
+    <text text="STREAM EFFECTS" />
+    <toggle-setting value="emote-rain-enabled" text="ChatEmoteRain" />
+    <toggle-setting value="sound-alerts-enabled" text="SoundAlerts" />
+
+    <text text="ACCESSIBILITY AND AUTOMATION" />
+    <toggle-setting value="tts-enabled" text="Text-to-Speech" />
+    <toggle-setting value="translation-enabled" text="Automatic Translation" />
+    <toggle-setting value="integrations-enabled" text="ChatIntegrations" />
+
+    <text text="STREAM TOOLS" />
+    <toggle-setting value="song-requests-enabled" text="ChatRequest / BSR" />
+    <toggle-setting value="viewer-count-enabled" text="Viewer Count" />
+
+    <horizontal>
+      <button text="Save settings" on-click="save-settings" />
+      <button text="Reset defaults" on-click="reset-settings" />
+    </horizontal>
+    <text text="status" />
+  </vertical>
+</bg>

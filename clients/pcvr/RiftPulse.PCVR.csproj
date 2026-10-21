@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>RiftPulse.PCVR</RootNamespace>
+    <AssemblyName>RiftPulse.PCVR</AssemblyName>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <BeatSaberDir Condition="'$(BeatSaberDir)' == ''">E:\bsmanager\BSManager\BSInstances\SteamVR</BeatSaberDir>
+    <DebugType>portable</DebugType>
+    <Deterministic>true</Deterministic>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IPA.Loader">
+      <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BSML">
+      <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RiftPulse.Settings.bsml">
+      <LogicalName>RiftPulse.Settings.bsml</LogicalName>
+    </EmbeddedResource>
+    <None Update="manifest.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

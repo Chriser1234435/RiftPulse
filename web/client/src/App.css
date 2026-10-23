@@ -272,3 +272,9 @@
 .panel-icon svg, .value-icon svg, .feature-icon svg, .note-icon svg, .list-check svg, .trust-check, .text-link svg, .button svg, .roadmap-note svg, .chip-bars svg { width: 1em; height: 1em; flex: 0 0 auto; stroke-width: 1.8; }
 .panel-icon svg { width: 18px; height: 18px; }
 .value-icon svg, .feature-icon svg { width: 19px; height: 19px; }
+
+
+/* Ensure every Lucide icon renders consistently across all pages. */
+svg.lucide { display: inline-block; width: 1em; height: 1em; flex: 0 0 auto; vertical-align: middle; stroke-width: 1.8; }
+.panel-icon svg.lucide { width: 18px; height: 18px; }
+.value-icon svg.lucide, .feature-icon svg.lucide { width: 19px; height: 19px; }

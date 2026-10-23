@@ -283,3 +283,5 @@ svg.lucide { display: inline-block; width: 1em; height: 1em; flex: 0 0 auto; ver
 svg.lucide { overflow: visible; }
 
 svg.lucide { stroke-linecap: round; stroke-linejoin: round; }
+
+/* Preview deployment trigger: global icon rendering rules are active. */

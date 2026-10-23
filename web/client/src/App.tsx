@@ -249,7 +249,7 @@ function Dashboard() {
     if (path === '/dashboard/preferences') void apiFetch('/api/settings').then(body => {
       if (cancelled) return
       const saved = (body.settings?.settings ?? {}) as WebPreferences
-      setPreferences({ locale: typeof saved.locale === 'string' ? saved.locale : 'en', productUpdates: saved.productUpdates === true })
+      setPreferences({ ...saved, locale: typeof saved.locale === 'string' ? saved.locale : 'en', productUpdates: saved.productUpdates === true })
       setStatusMessage('Saved preferences loaded from your account.')
     }).catch(error => { if (!cancelled) setStatusMessage(error.message ?? 'Could not load preferences.') })
     if (path === '/dashboard/connections') void apiFetch('/api/platform-connections').then(body => {

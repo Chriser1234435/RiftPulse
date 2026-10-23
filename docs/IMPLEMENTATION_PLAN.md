@@ -1,14 +1,14 @@
 # RiftPulse - Initial Implementation Plan
 
 **Created:** 2026-10-21
-**State:** Step 2 is complete with documented limitations. Step 3 authentication implementation is in progress. The user's step-by-step approval rule remains authoritative.
+**Current state (2026-10-22):** Steps 1-5 are recorded complete, with Step 5 documented as complete with a limitation. Step 6 website foundation is in progress; local design/build checks pass, but Cloudflare Pages preview creation is blocked by a Cloudflare Git installation/API authorization error. The user's step-by-step approval rule remains authoritative.
 **Change control:** Do not reorder or replace the agreed roadmap without documenting dependencies and obtaining user approval.
 
 ## Product architecture baseline
-- **Website:** Cloudflare Pages; intended public hostname `riftpulse.me`. No Pages project is verified.
-- **API/workers:** Railway for server-side API, webhook receivers, and durable connector workers. Intended API hostname `api.riftpulse.me`, pending service and domain setup.
-- **Database:** Neon PostgreSQL for relational records, migrations, least-privilege roles, and environment separation.
-- **Identity:** Clerk selected for managed customer identity. The local React/Express integration is implemented; Clerk application keys and live acceptance remain pending. AppDeploy is not a live dependency.
+- **Website:** Cloudflare Pages; intended public hostname `riftpulse.me`. The RiftPulse website has not been transferred/deployed to Cloudflare Pages; this is future website work, not a completed Step 5 deliverable.
+- **API/workers:** Railway for server-side API, webhook receivers, and durable connector workers. A dedicated **development** Railway project and `riftpulse-api` service are online at https://riftpulse-api-development.up.railway.app. This is not a production API/domain cutover.
+- **Database:** Neon PostgreSQL for relational records, migrations, least-privilege roles, and environment separation. Development schema and basic profile/settings persistence are documented in `docs/STEP4_DATABASE_REPORT.md`.
+- **Identity:** Clerk managed customer identity. User has confirmed live development authentication and dashboard access. Do not put secrets in source control or chat.
 - **Game clients:** Separate PCVR BSIPA/C# project and Quest-native C++/CMake project, sharing protocol and configuration contracts only.
 - **Secrets:** Backend-only platform/service credentials. Per-user OAuth tokens encrypted at rest; never put secrets in web assets, source control, logs, or client binaries.
 - **Event model:** Normalize platform events, validate them, deduplicate by source/event identity, apply bounded queues, and use bounded retries/backoff with explicit stale/unavailable states.
@@ -23,12 +23,12 @@ A successful compile is not runtime compatibility. Mocks are not proof of an ext
 ## Roadmap with step gates
 | Step | Name | Core completion evidence |
 |---:|---|---|
-| 1 | Environment, integrations, requirements audit | Completed: verified inventory, provisional architecture, costs, risks, blockers documented. |
-| 2 | Architecture and hosting migration plan | Complete with documented limitations: Cloudflare Pages + Railway + Neon, DNS/rollback, security boundaries, costs, prerequisites documented. No provisioning. |
-| 3 | Customer authentication for the new architecture | In progress: Clerk client and API code built/tested locally; external app configuration and live sign-in/session tests pending. |
-| 4 | Database and persistent application data | Neon schema/migrations apply; persistence and cross-user isolation verified; schema documented. |
-| 5 | Backend foundation and production infrastructure | Approved API/services start; health checks pass; secrets/config secure; cloud operation does not depend on the PC. |
-| 6 | Website foundation and design system | Responsive branded site/navigation render; no module toggles on website. |
+| 1 | Environment, integrations, requirements audit | Complete: verified inventory, architecture, costs, risks, and blockers documented. |
+| 2 | Architecture and hosting migration plan | Complete with documented limitations: Cloudflare Pages + Railway + Neon, DNS/rollback, security boundaries, costs, prerequisites documented. No production cutover. |
+| 3 | Customer authentication for the new architecture | Core development sign-in/sign-up/dashboard/protected API/sign-out accepted; password recovery and session-expiry behavior remain unverified. |
+| 4 | Database and persistent application data | Development Neon schema/migrations, persistence, least-privilege role, and cross-user isolation verified. |
+| 5 | Backend foundation and development infrastructure | **Complete with documented limitation:** Railway development API online, health check passes, user confirmed authentication and save-refresh persistence. Full website PC-offline test is deferred until the frontend is hosted; see Step 5 report. |
+| 6 | Website foundation and design system | Responsive branded site, sections/navigation, plan clarity, mobile layout, metadata, and local lint/build/route checks are implemented. Cloudflare Pages preview deployment is blocked pending Cloudflare Git installation/API reauthorization; no custom domain/DNS or production deployment. In progress. |
 | 7 | Authenticated website features | Dashboard, identity, platform connection entry points, downloads, installation management, diagnostics, docs work behind authorization. |
 | 8 | PCVR mod foundation | Correct PCVR artifact builds against explicitly chosen game profile; loader/dependencies verified; in-game Settings demonstrated. |
 | 9 | Native Quest mod foundation | Separate Quest-native artifact and toolchain verified; physical installation/runtime test when headset available. |
@@ -40,15 +40,15 @@ A successful compile is not runtime compatibility. Mocks are not proof of an ext
 | 15-26 | Twelve streaming modules | Each module's runtime behavior and acceptance tests verified individually. |
 | 27 | Cross-module integration | Event flow, shared settings, interactions, performance, cleanup, failure isolation regression-tested. |
 | 28 | Security and privacy audit | Auth, authorization, tokens, pairing, DB access, API exposure, logs, deletion/export, release artifacts reviewed. |
-| 29 | Production deployment | Approved production services deployed; health, config, secrets, real endpoints verified. |
+| 29 | Production deployment | Approved production services deployed; health, config, secrets, real endpoints verified. Separate approval required; no production deployment in Step 5. |
 | 30 | PCVR acceptance testing | Actual artifact installed/launched/tested in selected Beat Saber profile; logs and outcome recorded. |
 | 31 | Physical Quest acceptance testing | Native artifact tested on headset when available; otherwise blocker precisely documented. |
 | 32 | Final regression, release, handoff | Applicable regression passes; artifacts, installation guides, changelog, limits, and final report accurate. |
 
 ## Dependencies and gates
-1. Step 3 must finish Clerk app configuration and live sign-up/sign-in/sign-out, password recovery, and API authorization tests.
-2. Step 4 establishes application data ownership and tests cross-user isolation before private account records are exposed.
-3. Step 5 creates only approved RiftPulse-scoped infrastructure after reviewing pricing, free-tier limits, and expected spend.
+1. Steps 3 and 4 provide managed identity and account-scoped data foundations; their reports document tested behavior and remaining limitations.
+2. Step 5 creates only approved RiftPulse-scoped development infrastructure. The development API is hosted; this does not establish that the website is deployed or that production is ready.
+3. Step 6 owns the website foundation and intended Cloudflare Pages preview. Local lint/build/route checks pass; the Cloudflare project was not created because the connected Cloudflare API returned HTTP 401 for the Git-backed Pages project request. Reauthorize the Cloudflare integration and retry using Git-backed preview deployments with production deployments disabled. A full browser test while the user's PC is off requires a hosted frontend.
 4. DNS cutover occurs only after Pages and API domains are verified, old records are captured, rollback is documented, and the user explicitly approves.
 5. Step 8 should use `E:\bsmanager\BSManager\BSInstances\SteamVR` (Beat Saber 1.40.8) unless another supported target is approved.
 6. Step 9 requires C++/CMake/Android toolchain discovery or installation and ADB device authorization.
@@ -56,4 +56,4 @@ A successful compile is not runtime compatibility. Mocks are not proof of an ext
 8. Before production, separate development/test/production secrets and database targets; never run destructive migrations without a verified recovery path.
 
 ## Current status
-Step 3 is in progress. See `docs/STEP3_AUTH_REPORT.md` and `docs/CLERK_SETUP_GUIDE.md`. No cloud deployment, DNS change, Neon project, or Railway service has been created.
+Steps 1-5 are recorded complete (Step 5 with documented limitation). Step 6 is in progress; see `docs/MASTER_CHECKLIST.md` and `docs/STEP6_WEBSITE_REPORT.md`. Do not begin Step 7 until the user explicitly approves.

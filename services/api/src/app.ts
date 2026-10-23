@@ -196,7 +196,21 @@ export function createApp() {
     res.status(404).json({ error: 'Not found.' })
   })
 
-  app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  app.use((error: unknown, req: Request, res: Response, _next: NextFunction) => {
+    if (error instanceof Error) {
+      const details = error as Error & { code?: string; constraint?: string; table?: string }
+      console.error('[riftpulse-api] request failed', {
+        method: req.method,
+        path: req.path,
+        name: details.name,
+        code: details.code,
+        constraint: details.constraint,
+        table: details.table,
+        message: details.message.slice(0, 300),
+      })
+    } else {
+      console.error('[riftpulse-api] request failed with a non-Error value', { path: req.path })
+    }
     const status = error instanceof Error && error.message.includes('Origin is not allowed')
       ? 403
       : 500

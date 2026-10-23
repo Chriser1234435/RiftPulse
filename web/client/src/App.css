@@ -281,3 +281,5 @@ svg.lucide { display: inline-block; width: 1em; height: 1em; flex: 0 0 auto; ver
 
 /* Prevent SVG icon strokes from being clipped in compact icon containers. */
 svg.lucide { overflow: visible; }
+
+svg.lucide { stroke-linecap: round; stroke-linejoin: round; }

@@ -19,11 +19,10 @@
   --purple: #9b7bff;
   --cyan: #67e8f9;
 }
-
 * { box-sizing: border-box; }
-html { min-width: 320px; min-height: 100%; background: var(--bg); }
+html { min-width: 320px; min-height: 100%; background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 24px; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 button, input { font: inherit; }
 a { color: inherit; }
-button:focus-visible, a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+button:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
 ::selection { background: rgba(155, 123, 255, .4); color: white; }

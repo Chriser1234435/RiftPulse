@@ -10,7 +10,7 @@ Status values: Not Started / In Progress / Awaiting Dependency / Implemented / T
 - [x] Step 4 - Database and persistent application data (development Neon schema, persistence, and cross-user isolation verified)
 - [x] Step 5 - Backend foundation and development infrastructure - **Complete with documented limitation**; Railway development API online, health check passes, user-confirmed authentication and settings persistence. See `docs/STEP5_BACKEND_REPORT.md`.
 - [x] Step 6 - Website foundation and design system - user-verified in the Cloudflare Pages development preview; profile and saved settings confirmed after refresh. See `docs/STEP6_WEBSITE_REPORT.md`.
-- [ ] Step 7 - Authenticated website features - locally implemented; lint/build/API tests pass; hosted acceptance pending. See `docs/STEP7_AUTHENTICATED_WEBSITE_REPORT.md`.
+- [x] Step 7 - Authenticated website features - portal implemented, local lint/build/API tests pass, and the user confirmed hosted preferences, installation management, and all portal pages. See `docs/STEP7_AUTHENTICATED_WEBSITE_REPORT.md`.
 - [ ] Step 8 - PCVR mod foundation
 - [ ] Step 9 - Native Quest mod foundation
 - [ ] Step 10 - Secure pairing and configuration synchronization
@@ -36,4 +36,4 @@ Status values: Not Started / In Progress / Awaiting Dependency / Implemented / T
 
 ## Approval gate
 
-Step 5 is complete with the limitation above. Step 6 is user-verified in the development preview. Step 7 is in progress; complete hosted acceptance and update its report before marking complete. **Do not start Step 8 until the user explicitly approves continuation.** No production deployment, DNS change, paid-service upgrade, destructive Git operation, or production database migration was performed.
+Step 5 is complete with the limitation above. Step 6 is user-verified in the development preview. Step 7 is complete with user-confirmed hosted acceptance. **Do not start Step 8 until the user explicitly approves continuation.** No production deployment, DNS change, paid-service upgrade, destructive Git operation, or production database migration was performed.

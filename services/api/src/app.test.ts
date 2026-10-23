@@ -38,6 +38,20 @@ test('protected identity endpoint fails closed when auth keys are absent', async
   assert.equal(response.body.error, 'Authentication is not configured on this API.')
 })
 
+test('new account feature endpoints fail closed when auth is not configured', async () => {
+  const checks = [
+    request(app).get('/api/platform-connections'),
+    request(app).get('/api/installations'),
+    request(app).post('/api/installations').send({ clientPlatform: 'pcvr', displayName: 'Test setup' }),
+    request(app).post('/api/installations/00000000-0000-4000-8000-000000000000/revoke'),
+  ]
+  for (const pending of checks) {
+    const response = await pending
+    assert.equal(response.status, 503)
+    assert.equal(response.body.error, 'Authentication is not configured on this API.')
+  }
+})
+
 test('unknown API routes do not expose server details', async () => {
   const response = await request(app).get('/api/private-internals')
   assert.equal(response.status, 404)

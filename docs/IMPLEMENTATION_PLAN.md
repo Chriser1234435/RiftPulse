@@ -1,7 +1,7 @@
 # RiftPulse - Initial Implementation Plan
 
 **Created:** 2026-10-21
-**Current state (2026-10-22):** Steps 1-5 are recorded complete, with Step 5 documented as complete with a limitation. Step 6 website foundation is in progress; local design/build checks pass, but Cloudflare Pages preview creation is blocked by a Cloudflare Git installation/API authorization error. The user's step-by-step approval rule remains authoritative.
+**Current state (2026-10-22):** Steps 1-5 are recorded complete, with Step 5 documented as complete with a limitation. Step 6 website foundation and preview are user-verified. Step 7 authenticated website features are implemented locally and awaiting hosted preview acceptance. The user's step-by-step approval rule remains authoritative.
 **Change control:** Do not reorder or replace the agreed roadmap without documenting dependencies and obtaining user approval.
 
 ## Product architecture baseline
@@ -28,8 +28,8 @@ A successful compile is not runtime compatibility. Mocks are not proof of an ext
 | 3 | Customer authentication for the new architecture | Core development sign-in/sign-up/dashboard/protected API/sign-out accepted; password recovery and session-expiry behavior remain unverified. |
 | 4 | Database and persistent application data | Development Neon schema/migrations, persistence, least-privilege role, and cross-user isolation verified. |
 | 5 | Backend foundation and development infrastructure | **Complete with documented limitation:** Railway development API online, health check passes, user confirmed authentication and save-refresh persistence. Full website PC-offline test is deferred until the frontend is hosted; see Step 5 report. |
-| 6 | Website foundation and design system | Responsive branded site, sections/navigation, plan clarity, mobile layout, metadata, and local lint/build/route checks are implemented. Cloudflare Pages preview deployment is blocked pending Cloudflare Git installation/API reauthorization; no custom domain/DNS or production deployment. In progress. |
-| 7 | Authenticated website features | Dashboard, identity, platform connection entry points, downloads, installation management, diagnostics, docs work behind authorization. |
+| 6 | Website foundation and design system | Complete for the preview acceptance checks: hosted preview is available and the user confirmed profile display and saved settings after refresh. No custom domain/DNS or production deployment. |
+| 7 | Authenticated website features | In progress: account portal sections, web preferences, platform connection entry points, pending installation records/revocation, downloads state, diagnostics, and docs implemented locally. Hosted preview acceptance remains required. |
 | 8 | PCVR mod foundation | Correct PCVR artifact builds against explicitly chosen game profile; loader/dependencies verified; in-game Settings demonstrated. |
 | 9 | Native Quest mod foundation | Separate Quest-native artifact and toolchain verified; physical installation/runtime test when headset available. |
 | 10 | Secure pairing and configuration sync | Valid pairing works; expired/reused/unauthorized/revoked challenges fail; versioned settings synchronize. |
@@ -48,7 +48,7 @@ A successful compile is not runtime compatibility. Mocks are not proof of an ext
 ## Dependencies and gates
 1. Steps 3 and 4 provide managed identity and account-scoped data foundations; their reports document tested behavior and remaining limitations.
 2. Step 5 creates only approved RiftPulse-scoped development infrastructure. The development API is hosted; this does not establish that the website is deployed or that production is ready.
-3. Step 6 owns the website foundation and intended Cloudflare Pages preview. Local lint/build/route checks pass; the Cloudflare project was not created because the connected Cloudflare API returned HTTP 401 for the Git-backed Pages project request. Reauthorize the Cloudflare integration and retry using Git-backed preview deployments with production deployments disabled. A full browser test while the user's PC is off requires a hosted frontend.
+3. Step 6 owns the website foundation and Cloudflare Pages preview; the user confirmed the preview, profile display, and save-refresh settings persistence. Step 7 owns authenticated website features; its report tracks hosted verification of the new portal/API actions.
 4. DNS cutover occurs only after Pages and API domains are verified, old records are captured, rollback is documented, and the user explicitly approves.
 5. Step 8 should use `E:\bsmanager\BSManager\BSInstances\SteamVR` (Beat Saber 1.40.8) unless another supported target is approved.
 6. Step 9 requires C++/CMake/Android toolchain discovery or installation and ADB device authorization.
@@ -56,4 +56,4 @@ A successful compile is not runtime compatibility. Mocks are not proof of an ext
 8. Before production, separate development/test/production secrets and database targets; never run destructive migrations without a verified recovery path.
 
 ## Current status
-Steps 1-5 are recorded complete (Step 5 with documented limitation). Step 6 is in progress; see `docs/MASTER_CHECKLIST.md` and `docs/STEP6_WEBSITE_REPORT.md`. Do not begin Step 7 until the user explicitly approves.
+Steps 1-6 are recorded complete for their stated acceptance scope (Step 5 with documented limitation). Step 7 is in progress; see `docs/MASTER_CHECKLIST.md` and `docs/STEP7_AUTHENTICATED_WEBSITE_REPORT.md`. Do not begin Step 8 until the user explicitly approves.

@@ -226,3 +226,44 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+/* Step 7 authenticated account portal */
+.portal-nav { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 18px; margin: -8px 0 28px; border-bottom: 1px solid var(--line); }
+.portal-nav-link { flex: 0 0 auto; padding: 10px 12px; border: 1px solid transparent; border-radius: 9px; color: #9ba1bc; text-decoration: none; font-size: 11px; font-weight: 700; }
+.portal-nav-link:hover, .portal-nav-link.active { color: #f4f5ff; border-color: rgba(155,123,255,.28); background: rgba(155,123,255,.1); }
+.portal-page-heading { margin: 12px 0 26px; }
+.portal-page-heading h2 { margin: 12px 0 8px; font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -1.4px; }
+.portal-page-heading p { max-width: 720px; color: #969cb7; font-size: 12px; line-height: 1.8; }
+.connection-grid, .docs-grid, .installation-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+.connection-card-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.connection-card-heading h3, .installation-form h3, .empty-state h3, .docs-grid h3 { margin: 0 0 5px; font-size: 14px; }
+.connection-card-heading p { color: #858ba7; font-size: 10px; text-transform: capitalize; }
+.installation-form { margin-bottom: 16px; }
+.installation-fields { display: grid; grid-template-columns: minmax(140px, .8fr) minmax(180px, 1.3fr) auto; align-items: end; gap: 13px; margin: 18px 0 12px; }
+.installation-fields label, .preference-field { display: grid; gap: 8px; color: #bfc3d9; font-size: 11px; font-weight: 700; }
+.installation-fields input, .installation-fields select, .preference-field select { width: 100%; min-height: 43px; padding: 0 12px; border: 1px solid var(--line); border-radius: 9px; outline: none; background: #0b0d16; color: #f4f5ff; }
+.installation-fields input:focus, .installation-fields select:focus, .preference-field select:focus { border-color: rgba(103,232,249,.65); }
+.installation-form .panel-copy, .preference-field small, .preference-toggle small { display: block; color: #858ba7; font-size: 10px; line-height: 1.7; }
+.installation-list { margin-top: 15px; }
+.installation-item .button { margin-top: 14px; }
+.empty-state { padding: 34px; text-align: center; }
+.empty-state h3 { margin-top: 14px; }
+.empty-state p { max-width: 580px; margin: 8px auto 0; color: #969cb7; font-size: 11px; line-height: 1.9; }
+.preferences-panel { display: grid; gap: 24px; max-width: 760px; }
+.preference-field { max-width: 360px; }
+.preference-toggle { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.preference-toggle strong, .preference-toggle small { display: block; }
+.preference-toggle strong { margin-bottom: 6px; color: #e4e5f3; font-size: 12px; }
+.preference-toggle input { width: 18px; height: 18px; accent-color: #a995ff; flex-shrink: 0; }
+.portal-status { margin: 16px 0 0; color: #9ca3bf; font-size: 11px; line-height: 1.8; overflow-wrap: anywhere; }
+.text-link { display: inline-block; margin-top: 12px; color: #c5b9ff; font-size: 11px; font-weight: 700; text-decoration: none; }
+.text-link:hover { color: var(--cyan); }
+.api-ok { color: #91efcb; }
+.api-ok i { background: #6ce7b5; }
+@media (max-width: 760px) {
+  .portal-nav { margin-top: 0; gap: 5px; }
+  .portal-nav-link { padding: 9px 10px; font-size: 10px; }
+  .connection-grid, .docs-grid, .installation-list { grid-template-columns: 1fr; }
+  .installation-fields { grid-template-columns: 1fr; }
+  .installation-fields .button { width: 100%; }
+}

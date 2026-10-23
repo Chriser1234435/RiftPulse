@@ -1,4 +1,4 @@
-import cors from 'cors'
+﻿import cors from 'cors'
 import express, { type NextFunction, type Request, type Response } from 'express'
 import { rateLimit } from 'express-rate-limit'
 import helmet from 'helmet'
@@ -187,6 +187,157 @@ export function createApp() {
       })
       res.setHeader('Cache-Control', 'no-store')
       res.status(200).json({ settings: saved })
+    } catch (error) {
+      next(error)
+    }
+  })
+
+
+  app.get('/api/platform-connections', async (req: Request, res: Response, next: NextFunction) => {
+    if (!authConfigured) {
+      res.status(503).json({ error: 'Authentication is not configured on this API.' })
+      return
+    }
+    try {
+      const { isAuthenticated, userId } = getAuth(req)
+      if (!isAuthenticated || !userId) {
+        res.status(401).json({ error: 'Authentication required.' })
+        return
+      }
+      if (!databaseConfigured) {
+        res.status(503).json({ error: 'Database persistence is not configured.' })
+        return
+      }
+      const connections = await withUserTransaction(userId, async (client) => {
+        const result = await client.query(
+          `SELECT id, provider, status, scopes, connected_at, created_at, updated_at
+           FROM public.platform_connections
+           WHERE clerk_user_id = $1
+           ORDER BY provider ASC, created_at DESC`,
+          [userId],
+        )
+        return result.rows
+      })
+      res.setHeader('Cache-Control', 'no-store')
+      res.status(200).json({ connections })
+    } catch (error) {
+      next(error)
+    }
+  })
+
+  app.get('/api/installations', async (req: Request, res: Response, next: NextFunction) => {
+    if (!authConfigured) {
+      res.status(503).json({ error: 'Authentication is not configured on this API.' })
+      return
+    }
+    try {
+      const { isAuthenticated, userId } = getAuth(req)
+      if (!isAuthenticated || !userId) {
+        res.status(401).json({ error: 'Authentication required.' })
+        return
+      }
+      if (!databaseConfigured) {
+        res.status(503).json({ error: 'Database persistence is not configured.' })
+        return
+      }
+      const installations = await withUserTransaction(userId, async (client) => {
+        const result = await client.query(
+          `SELECT id, client_platform, display_name, status, paired_at, last_seen_at, revoked_at, created_at, updated_at
+           FROM public.installations
+           WHERE clerk_user_id = $1
+           ORDER BY created_at DESC`,
+          [userId],
+        )
+        return result.rows
+      })
+      res.setHeader('Cache-Control', 'no-store')
+      res.status(200).json({ installations })
+    } catch (error) {
+      next(error)
+    }
+  })
+
+  app.post('/api/installations', async (req: Request, res: Response, next: NextFunction) => {
+    if (!authConfigured) {
+      res.status(503).json({ error: 'Authentication is not configured on this API.' })
+      return
+    }
+    try {
+      const { isAuthenticated, userId } = getAuth(req)
+      if (!isAuthenticated || !userId) {
+        res.status(401).json({ error: 'Authentication required.' })
+        return
+      }
+      if (!databaseConfigured) {
+        res.status(503).json({ error: 'Database persistence is not configured.' })
+        return
+      }
+      const platform = req.body?.clientPlatform
+      const displayName = typeof req.body?.displayName === 'string' ? req.body.displayName.trim() : ''
+      if (platform !== 'pcvr' && platform !== 'quest') {
+        res.status(400).json({ error: 'clientPlatform must be pcvr or quest.' })
+        return
+      }
+      if (displayName.length < 1 || displayName.length > 120) {
+        res.status(400).json({ error: 'displayName must be between 1 and 120 characters.' })
+        return
+      }
+      const installation = await withUserTransaction(userId, async (client) => {
+        await client.query(
+          'INSERT INTO public.user_profiles (clerk_user_id) VALUES ($1) ON CONFLICT (clerk_user_id) DO NOTHING',
+          [userId],
+        )
+        const result = await client.query(
+          `INSERT INTO public.installations (clerk_user_id, client_platform, display_name, status)
+           VALUES ($1, $2, $3, 'pending')
+           RETURNING id, client_platform, display_name, status, paired_at, last_seen_at, revoked_at, created_at, updated_at`,
+          [userId, platform, displayName],
+        )
+        return result.rows[0]
+      })
+      res.setHeader('Cache-Control', 'no-store')
+      res.status(201).json({ installation })
+    } catch (error) {
+      next(error)
+    }
+  })
+
+  app.post('/api/installations/:installationId/revoke', async (req: Request, res: Response, next: NextFunction) => {
+    if (!authConfigured) {
+      res.status(503).json({ error: 'Authentication is not configured on this API.' })
+      return
+    }
+    try {
+      const { isAuthenticated, userId } = getAuth(req)
+      if (!isAuthenticated || !userId) {
+        res.status(401).json({ error: 'Authentication required.' })
+        return
+      }
+      if (!databaseConfigured) {
+        res.status(503).json({ error: 'Database persistence is not configured.' })
+        return
+      }
+      const installationId = Array.isArray(req.params.installationId) ? req.params.installationId[0] : req.params.installationId
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(installationId)) {
+        res.status(400).json({ error: 'Invalid installation ID.' })
+        return
+      }
+      const revoked = await withUserTransaction(userId, async (client) => {
+        const result = await client.query(
+          `UPDATE public.installations
+           SET status = 'revoked', revoked_at = now(), updated_at = now()
+           WHERE id = $1 AND clerk_user_id = $2 AND status <> 'revoked'
+           RETURNING id, client_platform, display_name, status, revoked_at, updated_at`,
+          [installationId, userId],
+        )
+        return result.rows[0]
+      })
+      if (!revoked) {
+        res.status(404).json({ error: 'Active installation not found for this account.' })
+        return
+      }
+      res.setHeader('Cache-Control', 'no-store')
+      res.status(200).json({ installation: revoked })
     } catch (error) {
       next(error)
     }

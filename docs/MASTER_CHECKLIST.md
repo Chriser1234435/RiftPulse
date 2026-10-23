@@ -1,6 +1,6 @@
 # Master Checklist
 
-> Current-state update (2026-10-22): Steps 1-4 are complete based on the recorded audit, authentication acceptance, and development Neon verification. Step 5 is complete with a documented limitation. A dedicated Railway development API is online. The website has **not** been deployed to Cloudflare Pages; website foundation/design is Step 6, and production deployment/custom-domain work remains a later gated step. No production deployment or DNS change was performed.
+> Current-state update (2026-10-22): Steps 1-5 are complete (Step 5 with a documented limitation). Step 6 website foundation and preview are user-verified. Step 7 authenticated website features are implemented locally and awaiting hosted preview acceptance. Production deployment/custom-domain work remains separately gated; no production deployment or DNS change was performed.
 
 Status values: Not Started / In Progress / Awaiting Dependency / Implemented / Testing / Blocked / Failed / Complete / Complete With Documented Limitation
 
@@ -9,8 +9,8 @@ Status values: Not Started / In Progress / Awaiting Dependency / Implemented / T
 - [x] Step 3 - Customer authentication for the new architecture (core live sign-in/sign-up/dashboard/protected API/sign-out accepted; password recovery and session-expiry behavior remain unverified)
 - [x] Step 4 - Database and persistent application data (development Neon schema, persistence, and cross-user isolation verified)
 - [x] Step 5 - Backend foundation and development infrastructure - **Complete with documented limitation**; Railway development API online, health check passes, user-confirmed authentication and settings persistence. See `docs/STEP5_BACKEND_REPORT.md`.
-- [ ] Step 6 - Website foundation and design system - In Progress; responsive landing page, feature/plan sections, mobile layout, metadata, lint/build/route smoke tests completed locally; Cloudflare Pages preview deployment blocked by Cloudflare Git installation/API authorization error. See `docs/STEP6_WEBSITE_REPORT.md`.
-- [ ] Step 7 - Authenticated website features
+- [x] Step 6 - Website foundation and design system - user-verified in the Cloudflare Pages development preview; profile and saved settings confirmed after refresh. See `docs/STEP6_WEBSITE_REPORT.md`.
+- [ ] Step 7 - Authenticated website features - locally implemented; lint/build/API tests pass; hosted acceptance pending. See `docs/STEP7_AUTHENTICATED_WEBSITE_REPORT.md`.
 - [ ] Step 8 - PCVR mod foundation
 - [ ] Step 9 - Native Quest mod foundation
 - [ ] Step 10 - Secure pairing and configuration synchronization
@@ -36,4 +36,4 @@ Status values: Not Started / In Progress / Awaiting Dependency / Implemented / T
 
 ## Approval gate
 
-Step 5 is complete with the limitation above. Step 6 is in progress and blocked on Cloudflare Pages integration reauthorization before a preview project can be created. **Do not start Step 7 or any later step until the user explicitly approves continuation.** No production deployment, DNS change, paid-service upgrade, destructive Git operation, or production database migration was performed.
+Step 5 is complete with the limitation above. Step 6 is user-verified in the development preview. Step 7 is in progress; complete hosted acceptance and update its report before marking complete. **Do not start Step 8 until the user explicitly approves continuation.** No production deployment, DNS change, paid-service upgrade, destructive Git operation, or production database migration was performed.

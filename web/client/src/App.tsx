@@ -28,8 +28,8 @@ function Header() {
     <header className="site-header">
       <Brand />
       <nav className="main-nav" aria-label="Main navigation">
-        <Link className="nav-link" to="/#features">Features</Link>
-        <Link className="nav-link" to="/#plans">Plans</Link>
+        <Link className="nav-link nav-features" to="/#features">Features</Link>
+        <Link className="nav-link nav-plans" to="/#plans">Plans</Link>
         {isSignedIn ? (
           <>
             <Link className="nav-link nav-dashboard" to="/dashboard">Dashboard</Link>
@@ -55,8 +55,8 @@ function Home() {
           <span className="eyebrow"><span className="status-dot" /> BUILT FOR BEAT SABER STREAMERS</span>
           <h1>Your stream.<br /><span>Your rhythm.</span></h1>
           <p className="hero-description">
-            RiftPulse is a streaming toolkit designed to bring your community
-            into the game, with a clear path for PCVR and standalone Quest.
+            Bring your community into the game with one streaming toolkit
+            built for PCVR and standalone Quest.
           </p>
           <div className="hero-actions">
             <Link className="button" to={isSignedIn ? '/dashboard' : '/sign-up'}>

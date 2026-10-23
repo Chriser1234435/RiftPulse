@@ -1,5 +1,5 @@
 #root { min-height: 100vh; }
-.app-shell { min-height: 100vh; max-width: 1480px; margin: 0 auto; padding: 0 56px; overflow: hidden; }
+.app-shell { width: 100%; min-width: 0; min-height: 100vh; max-width: 1480px; margin: 0 auto; padding: 0 56px; overflow: hidden; }
 .site-header { position: relative; z-index: 5; min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
 .brand-lockup { display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; color: var(--text); text-decoration: none; font-size: 19px; font-weight: 800; letter-spacing: -.7px; }
 .brand-mark { width: 35px; height: 35px; display: inline-grid; place-items: center; border-radius: 12px; color: #0a0b12; background: linear-gradient(135deg, var(--cyan), var(--purple) 72%); box-shadow: 0 0 28px rgba(155,123,255,.24); transform: rotate(-5deg); }
@@ -165,17 +165,21 @@
 }
 @media (max-width: 760px) {
   .app-shell { padding: 0 21px; }
-  .site-header { min-height: 76px; gap: 14px; }
-  .brand-lockup { font-size: 17px; gap: 8px; }
+  .site-header { display: flex; width: 100%; min-width: 0; min-height: 76px; gap: 12px; justify-content: space-between; }
+  .brand-lockup { min-width: 0; font-size: 17px; gap: 8px; }
   .brand-mark { width: 32px; height: 32px; }
-  .main-nav { gap: 13px; }
+  .main-nav { display: none; }
   .nav-link { font-size: 11px; }
+  .main-nav > .nav-link:not(.nav-dashboard) { display: none; }
   .nav-sign-in { display: none; }
   .button-small { min-height: 36px; padding: 0 11px; font-size: 10px; }
+
   .hero-section { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 58px 0 46px; }
-  .hero-copy h1 { font-size: clamp(49px, 12vw, 65px); letter-spacing: -3.5px; }
-  .hero-description { font-size: 13px; }
-  .hero-visual { min-height: 330px; transform: scale(.9); margin: -3px 0; }
+  .hero-copy { width: 100%; min-width: 0; }
+  .hero-copy h1 { font-size: clamp(40px, 10.5vw, 52px); letter-spacing: -2.4px; overflow-wrap: anywhere; }
+  .hero-description { width: 100%; max-width: 34ch; min-width: 0; overflow-wrap: anywhere; font-size: 13px; }
+  .trust-row { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .hero-visual { width: 100%; min-width: 0; min-height: 330px; transform: scale(.84); margin: -3px 0; }
   .trust-row { gap: 10px 14px; }
   .value-strip { grid-template-columns: 1fr; gap: 17px; padding: 21px; }
   .content-section { padding: 78px 0; }

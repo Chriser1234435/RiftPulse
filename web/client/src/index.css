@@ -20,7 +20,7 @@
   --cyan: #67e8f9;
 }
 * { box-sizing: border-box; }
-html { min-width: 320px; min-height: 100%; background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 24px; }
+html { width: 100%; min-width: 320px; min-height: 100%; overflow-x: clip; background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 24px; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 button, input { font: inherit; }
 a { color: inherit; }

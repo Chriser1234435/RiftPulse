@@ -1,3 +1,7 @@
 # Cloud Services
 
-Reserved for independent backend APIs, platform connectors, and event workers. No service is implemented here yet. AppDeploy, Neon, and Railway responsibilities are described in `../docs/ARCHITECTURE.md`.
+- `api/` contains the local Express authentication foundation intended for Railway.
+- Additional platform connector APIs and event workers are not implemented yet.
+- Neon PostgreSQL remains the intended relational database for later approved work.
+
+See `../docs/ARCHITECTURE.md`, `../docs/API_DOCUMENTATION.md`, and `../docs/STEP3_AUTH_REPORT.md`. No Railway project or service has been created.

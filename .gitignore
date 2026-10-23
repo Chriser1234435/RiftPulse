@@ -18,3 +18,7 @@ TestResults/
 *.tmp
 *.bak
 dist/pcvr/*.dll
+
+**/node_modules/
+web/client/dist/
+services/api/dist/

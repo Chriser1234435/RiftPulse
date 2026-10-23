@@ -267,3 +267,8 @@
   .installation-fields { grid-template-columns: 1fr; }
   .installation-fields .button { width: 100%; }
 }
+
+/* Consistent sizing for inline SVG icon components */
+.panel-icon svg, .value-icon svg, .feature-icon svg, .note-icon svg, .list-check svg, .trust-check, .text-link svg, .button svg, .roadmap-note svg, .chip-bars svg { width: 1em; height: 1em; flex: 0 0 auto; stroke-width: 1.8; }
+.panel-icon svg { width: 18px; height: 18px; }
+.value-icon svg, .feature-icon svg { width: 19px; height: 19px; }

@@ -1,16 +1,17 @@
 ﻿import { SignIn, SignUp, UserButton, useAuth, useUser } from '@clerk/react'
 import { useCallback, useEffect, useState } from 'react'
 import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Activity, ArrowDown, ArrowRight, ArrowUpRight, AudioLines, Check, Gamepad2, Globe2, Monitor, Music2, Radio, ShieldCheck, Sparkles, UsersRound, Waves } from 'lucide-react'
 import './App.css'
 
 const apiBase = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
 const currentYear = new Date().getFullYear()
 
 const features = [
-  { number: '01', icon: 'â—Œ', title: 'Chat in the moment', text: 'Bring community messages closer to the action with an in-game chat experience.' },
-  { number: '02', icon: 'â™«', title: 'Voice and sound cues', text: 'Shape how chat, stream events, and alerts fit into your gameplay.' },
-  { number: '03', icon: 'â†—', title: 'Song requests', text: 'Build toward a smoother song-request flow with Beat Saber custom songs.' },
-  { number: '04', icon: 'æ–‡', title: 'More ways to connect', text: 'Plan for multilingual communities and a more accessible shared stream.' },
+  { number: '01', icon: <Radio />, title: 'Chat in the moment', text: 'Bring community messages closer to the action with an in-game chat experience.' },
+  { number: '02', icon: <AudioLines />, title: 'Voice and sound cues', text: 'Shape how chat, stream events, and alerts fit into your gameplay.' },
+  { number: '03', icon: <Music2 />, title: 'Song requests', text: 'Build toward a smoother song-request flow with Beat Saber custom songs.' },
+  { number: '04', icon: <Globe2 />, title: 'More ways to connect', text: 'Plan for multilingual communities and a more accessible shared stream.' },
 ]
 
 function Brand() {
@@ -38,7 +39,7 @@ function Header() {
         ) : (
           <>
             <Link className="nav-link nav-sign-in" to="/sign-in">Sign in</Link>
-            <Link className="button button-small" to="/sign-up">Create account <span aria-hidden="true">â†—</span></Link>
+            <Link className="button button-small" to="/sign-up">Create account <ArrowUpRight aria-hidden="true" /></Link>
           </>
         )}
       </nav>
@@ -60,14 +61,14 @@ function Home() {
           </p>
           <div className="hero-actions">
             <Link className="button" to={isSignedIn ? '/dashboard' : '/sign-up'}>
-              {isSignedIn ? 'Open dashboard' : 'Get started'} <span aria-hidden="true">â†’</span>
+              {isSignedIn ? 'Open dashboard' : 'Get started'} <ArrowRight aria-hidden="true" />
             </Link>
-            <Link className="button button-quiet" to="/#features">Explore the toolkit <span aria-hidden="true">â†“</span></Link>
+            <Link className="button button-quiet" to="/#features">Explore the toolkit <ArrowDown aria-hidden="true" /></Link>
           </div>
           <div className="trust-row">
-            <span><span className="trust-check">âœ“</span> Free plan available</span>
-            <span><span className="trust-check">âœ“</span> PCVR + Quest roadmap</span>
-            <span><span className="trust-check">âœ“</span> Gameplay controls stay in-game</span>
+            <span><Check className="trust-check" aria-hidden="true" /> Free plan available</span>
+            <span><Check className="trust-check" aria-hidden="true" /> PCVR + Quest roadmap</span>
+            <span><Check className="trust-check" aria-hidden="true" /> Gameplay controls stay in-game</span>
           </div>
         </div>
         <div className="hero-visual" aria-label="Decorative RiftPulse signal illustration">
@@ -77,16 +78,16 @@ function Home() {
           <div className="visual-orbit orbit-three" />
           <div className="visual-core"><span>R</span><i /><i /><i /></div>
           <div className="visual-chip chip-top"><span className="chip-dot" /> COMMUNITY FIRST</div>
-          <div className="visual-chip chip-bottom"><span className="chip-bars">â–® â–® â–®</span> STREAM / GAME / REPEAT</div>
+          <div className="visual-chip chip-bottom"><span className="chip-bars" aria-hidden="true"><Waves /></span> STREAM / GAME / REPEAT</div>
           <span className="visual-label visual-label-left">LOW FRICTION</span>
           <span className="visual-label visual-label-right">ONE TOOLKIT</span>
         </div>
       </section>
 
       <section className="value-strip" aria-label="RiftPulse principles">
-        <div><span className="value-icon">âœ³</span><span><strong>Made for the moment</strong><small>Community meets gameplay</small></span></div>
-        <div><span className="value-icon">âŒ˜</span><span><strong>One connected toolkit</strong><small>A clear home for your setup</small></span></div>
-        <div><span className="value-icon">â—ˆ</span><span><strong>Controls where they belong</strong><small>Gameplay settings stay in-game</small></span></div>
+        <div><span className="value-icon"><Sparkles aria-hidden="true" /></span><span><strong>Made for the moment</strong><small>Community meets gameplay</small></span></div>
+        <div><span className="value-icon"><UsersRound aria-hidden="true" /></span><span><strong>One connected toolkit</strong><small>A clear home for your setup</small></span></div>
+        <div><span className="value-icon"><Gamepad2 aria-hidden="true" /></span><span><strong>Controls where they belong</strong><small>Gameplay settings stay in-game</small></span></div>
       </section>
 
       <section className="content-section features-section" id="features">
@@ -104,7 +105,7 @@ function Home() {
             </article>
           ))}
         </div>
-        <p className="roadmap-note"><span aria-hidden="true">âœ¦</span> RiftPulse is being built in stages. Platform connectors and individual features become available as their development steps are completed.</p>
+        <p className="roadmap-note"><Sparkles aria-hidden="true" /> RiftPulse is being built in stages. Platform connectors and individual features become available as their development steps are completed.</p>
       </section>
 
       <section className="workflow-section">
@@ -131,14 +132,14 @@ function Home() {
             <div className="price-card-header"><span className="price-plan">Free</span><span className="price-tag">START HERE</span></div>
             <p className="price-description">A place to begin your RiftPulse setup.</p>
             <p className="price"><strong>$0</strong><span>/ month</span></p>
-            <ul className="price-list"><li><span>âœ“</span> Create your RiftPulse account</li><li><span>âœ“</span> Access account dashboard</li><li><span>âœ“</span> Add features as they launch</li></ul>
-            <Link className="button button-full" to={isSignedIn ? '/dashboard' : '/sign-up'}>{isSignedIn ? 'Open dashboard' : 'Create free account'} <span aria-hidden="true">â†’</span></Link>
+            <ul className="price-list"><li><span><Check aria-hidden="true" /></span> Create your RiftPulse account</li><li><span><Check aria-hidden="true" /></span> Access account dashboard</li><li><span><Check aria-hidden="true" /></span> Add features as they launch</li></ul>
+            <Link className="button button-full" to={isSignedIn ? '/dashboard' : '/sign-up'}>{isSignedIn ? 'Open dashboard' : 'Create free account'} <ArrowRight aria-hidden="true" /></Link>
           </article>
           <article className="price-card price-card-premium">
             <div className="price-card-header"><span className="price-plan">Premium</span><span className="price-tag price-tag-premium">PLANNED</span></div>
             <p className="price-description">More room for your streaming workflow.</p>
             <p className="price"><strong>$7.99</strong><span>/ month</span></p>
-            <ul className="price-list"><li><span>âœ¦</span> Premium feature set as announced</li><li><span>âœ¦</span> Server-verified membership</li><li><span>âœ¦</span> Clear plan and account status</li></ul>
+            <ul className="price-list"><li><span><Sparkles aria-hidden="true" /></span> Premium feature set as announced</li><li><span><Check aria-hidden="true" /></span> Server-verified membership</li><li><span><Check aria-hidden="true" /></span> Clear plan and account status</li></ul>
             <span className="button button-full button-disabled" aria-disabled="true">Premium isn't available yet</span>
             <p className="price-footnote">No checkout or recurring payment is active.</p>
           </article>
@@ -159,7 +160,7 @@ function Home() {
 
       <section className="closing-cta">
         <div><span className="eyebrow">YOUR COMMUNITY IS PART OF THE GAME</span><h2>Ready to find your rhythm?</h2><p>Set up your RiftPulse account and follow the build as new pieces come online.</p></div>
-        <Link className="button" to={isSignedIn ? '/dashboard' : '/sign-up'}>{isSignedIn ? 'Go to dashboard' : 'Get started for free'} <span aria-hidden="true">â†’</span></Link>
+        <Link className="button" to={isSignedIn ? '/dashboard' : '/sign-up'}>{isSignedIn ? 'Go to dashboard' : 'Get started for free'} <ArrowRight aria-hidden="true" /></Link>
       </section>
     </main>
   )
@@ -175,7 +176,7 @@ function AuthPage({ mode }: { mode: 'sign-in' | 'sign-up' }) {
         <span className="eyebrow">WELCOME TO RIFTPULSE</span>
         <h1>{mode === 'sign-in' ? 'Good to have you back.' : 'Find your flow.'}</h1>
         <p>{mode === 'sign-in' ? 'Sign in to manage your RiftPulse account.' : 'Create your account to get your streaming setup connected.'}</p>
-        <div className="auth-note"><span className="note-icon">âœ“</span><span>Protected account access<br /><small>Your private account details stay behind authentication.</small></span></div>
+        <div className="auth-note"><span className="note-icon"><ShieldCheck aria-hidden="true" /></span><span>Protected account access<br /><small>Your private account details stay behind authentication.</small></span></div>
       </div>
       <div className="auth-widget">
         {mode === 'sign-in' ? <SignIn routing="path" path="/sign-in" signUpUrl="/sign-up" /> : <SignUp routing="path" path="/sign-up" signInUrl="/sign-in" />}
@@ -299,19 +300,19 @@ function Dashboard() {
     <div className="dashboard-heading"><div><span className="eyebrow">YOUR ACCOUNT</span><h1>Welcome back, {displayName}.</h1><p>Manage account and web setup here. Gameplay module controls stay in-game.</p></div><UserButton /></div>
     <PortalNav />
     {route === '/dashboard' && <section className="dashboard-grid">
-      <article className="panel"><div className="panel-heading"><span className="panel-icon">â—‰</span><div><h2>Account profile</h2><p>Your signed-in identity</p></div></div><div className="profile-row"><span className="profile-avatar">{displayName.slice(0, 1).toUpperCase()}</span><div><strong>{user?.fullName || displayName}</strong><p>{email}</p></div></div><div className="detail-row"><span>Authentication</span><span className="state-pill"><i /> Signed in</span></div><div className="detail-row"><span>Account ID</span><code>{user?.id ?? 'Unavailable'}</code></div></article>
-      <article className="panel"><div className="panel-heading"><span className="panel-icon">âœ¦</span><div><h2>Current plan</h2><p>Your membership</p></div></div><div className="plan-name">Free <span>$0 / month</span></div><p className="panel-copy">Premium is planned at $7.99/month. Checkout is not connected and no paid subscription is active.</p><span className="coming-soon">BILLING NOT CONNECTED</span></article>
-      <article className="panel"><div className="panel-heading"><span className="panel-icon">âŒ˜</span><div><h2>Protected API</h2><p>Server-side verification</p></div></div><div className={'api-state api-' + apiResult.status}><i />{apiResult.status === 'ok' ? 'Verified' : apiResult.status}</div><p className="panel-copy">{apiResult.message}</p>{apiResult.userId && <div className="detail-row"><span>Verified user ID</span><code>{apiResult.userId}</code></div>}<Link className="text-link" to="/dashboard/diagnostics">Open diagnostics â†’</Link></article>
-      <article className="panel"><div className="panel-heading"><span className="panel-icon">â†—</span><div><h2>Setup shortcuts</h2><p>Next steps</p></div></div><ul className="next-list"><li><span className="list-check">âœ“</span><div><strong>Secure account</strong><p>Managed authentication is active.</p></div></li><li><span className="list-pending">02</span><div><strong>Connect platforms</strong><p>OAuth connectors are upcoming.</p></div></li><li><span className="list-pending">03</span><div><strong>Pair game clients</strong><p>Pairing arrives in Step 10.</p></div></li></ul></article>
+      <article className="panel"><div className="panel-heading"><span className="panel-icon"><UsersRound aria-hidden="true" /></span><div><h2>Account profile</h2><p>Your signed-in identity</p></div></div><div className="profile-row"><span className="profile-avatar">{displayName.slice(0, 1).toUpperCase()}</span><div><strong>{user?.fullName || displayName}</strong><p>{email}</p></div></div><div className="detail-row"><span>Authentication</span><span className="state-pill"><i /> Signed in</span></div><div className="detail-row"><span>Account ID</span><code>{user?.id ?? 'Unavailable'}</code></div></article>
+      <article className="panel"><div className="panel-heading"><span className="panel-icon"><Activity aria-hidden="true" /></span><div><h2>Current plan</h2><p>Your membership</p></div></div><div className="plan-name">Free <span>$0 / month</span></div><p className="panel-copy">Premium is planned at $7.99/month. Checkout is not connected and no paid subscription is active.</p><span className="coming-soon">BILLING NOT CONNECTED</span></article>
+      <article className="panel"><div className="panel-heading"><span className="panel-icon"><Radio aria-hidden="true" /></span><div><h2>Protected API</h2><p>Server-side verification</p></div></div><div className={'api-state api-' + apiResult.status}><i />{apiResult.status === 'ok' ? 'Verified' : apiResult.status}</div><p className="panel-copy">{apiResult.message}</p>{apiResult.userId && <div className="detail-row"><span>Verified user ID</span><code>{apiResult.userId}</code></div>}<Link className="text-link" to="/dashboard/diagnostics">Open diagnostics <ArrowUpRight aria-hidden="true" /></Link></article>
+      <article className="panel"><div className="panel-heading"><span className="panel-icon"><Sparkles aria-hidden="true" /></span><div><h2>Setup shortcuts</h2><p>Next steps</p></div></div><ul className="next-list"><li><span className="list-check"><ShieldCheck aria-hidden="true" /></span><div><strong>Secure account</strong><p>Managed authentication is active.</p></div></li><li><span className="list-pending">02</span><div><strong>Connect platforms</strong><p>OAuth connectors are upcoming.</p></div></li><li><span className="list-pending">03</span><div><strong>Pair game clients</strong><p>Pairing arrives in Step 10.</p></div></li></ul></article>
     </section>}
     {route === '/dashboard/connections' && <>
       <PortalHeading eyebrow="PLATFORM CONNECTIONS" title="Your streaming platforms" description="OAuth authorization becomes available after each connector is implemented and verified." />
-      <div className="connection-grid">{(['twitch','youtube','tiktok_live','kick'] as const).map(provider => { const records = connections.filter(item => item.provider === provider); return <article className="panel connection-card" key={provider}><div className="connection-card-heading"><span className="panel-icon">â—ˆ</span><div><h3>{providerNames[provider]}</h3><p>{records.length ? records.map(item => item.status).join(', ') : 'Not connected'}</p></div></div><p className="panel-copy">{records.length ? 'Connection metadata is shown without credentials.' : 'No connection is registered for this account yet.'}</p><button className="button button-full button-disabled" disabled>{records.some(item => item.status === 'connected') ? 'Manage connection (coming soon)' : 'Connect when available'}</button></article> })}</div>
+      <div className="connection-grid">{(['twitch','youtube','tiktok_live','kick'] as const).map(provider => { const records = connections.filter(item => item.provider === provider); return <article className="panel connection-card" key={provider}><div className="connection-card-heading"><span className="panel-icon"><Globe2 aria-hidden="true" /></span><div><h3>{providerNames[provider]}</h3><p>{records.length ? records.map(item => item.status).join(', ') : 'Not connected'}</p></div></div><p className="panel-copy">{records.length ? 'Connection metadata is shown without credentials.' : 'No connection is registered for this account yet.'}</p><button className="button button-full button-disabled" disabled>{records.some(item => item.status === 'connected') ? 'Manage connection (coming soon)' : 'Connect when available'}</button></article> })}</div>
     </>}
     {route === '/dashboard/installations' && <>
       <PortalHeading eyebrow="INSTALLATION MANAGEMENT" title="Your game clients" description="Create and revoke account-owned installation records. Pairing codes and live synchronization are Step 10." />
       <form className="panel installation-form" onSubmit={createInstallation}><h3>Add an installation record</h3><div className="installation-fields"><label>Client platform<select value={installPlatform} onChange={event => setInstallPlatform(event.target.value as 'pcvr' | 'quest')}><option value="pcvr">PCVR</option><option value="quest">Quest standalone</option></select></label><label>Display name<input value={installName} onChange={event => setInstallName(event.target.value)} required minLength={1} maxLength={120} placeholder="e.g. Main PCVR setup" /></label><button className="button" type="submit">Add installation</button></div><p className="panel-copy">This creates a pending record only; it does not pair a client or issue credentials.</p></form>
-      <div className="installation-list">{installations.length === 0 ? <article className="panel empty-state"><h3>No installations yet</h3><p>Add a PCVR or Quest record above. Pairing is not active yet.</p></article> : installations.map(item => <article className="panel installation-item" key={item.id}><div className="connection-card-heading"><span className="panel-icon">{item.client_platform === 'pcvr' ? 'â–£' : 'â—‰'}</span><div><h3>{item.display_name}</h3><p>{item.client_platform === 'pcvr' ? 'PCVR' : 'Quest standalone'} Â· {item.status}</p></div></div><div className="detail-row"><span>Created</span><span>{item.created_at ? new Date(item.created_at).toLocaleDateString() : 'â€”'}</span></div>{item.last_seen_at && <div className="detail-row"><span>Last seen</span><span>{new Date(item.last_seen_at).toLocaleString()}</span></div>}{item.status !== 'revoked' && <button className="button button-quiet" type="button" onClick={() => void revokeInstallation(item.id)}>Revoke record</button>}</article>)}</div>
+      <div className="installation-list">{installations.length === 0 ? <article className="panel empty-state"><h3>No installations yet</h3><p>Add a PCVR or Quest record above. Pairing is not active yet.</p></article> : installations.map(item => <article className="panel installation-item" key={item.id}><div className="connection-card-heading"><span className="panel-icon">{item.client_platform === 'pcvr' ? <Monitor aria-hidden="true" /> : <Gamepad2 aria-hidden="true" />}</span><div><h3>{item.display_name}</h3><p>{item.client_platform === 'pcvr' ? 'PCVR' : 'Quest standalone'} · {item.status}</p></div></div><div className="detail-row"><span>Created</span><span>{item.created_at ? new Date(item.created_at).toLocaleDateString() : 'Unavailable'}</span></div>{item.last_seen_at && <div className="detail-row"><span>Last seen</span><span>{new Date(item.last_seen_at).toLocaleString()}</span></div>}{item.status !== 'revoked' && <button className="button button-quiet" type="button" onClick={() => void revokeInstallation(item.id)}>Revoke record</button>}</article>)}</div>
     </>}
     {route === '/dashboard/preferences' && <>
       <PortalHeading eyebrow="WEB PREFERENCES" title="Make RiftPulse yours" description="These affect the website only. Gameplay module settings remain in the in-game Settings tab." />
@@ -319,7 +320,7 @@ function Dashboard() {
     </>}
     {route === '/dashboard/downloads' && <><PortalHeading eyebrow="DOWNLOADS" title="Your RiftPulse builds" description="Download links will appear here when signed and tested artifacts are published." /><section className="panel empty-state"><h3>No public builds are published yet</h3><p>PCVR and Quest artifacts will list version, supported game/client version, checksum, and installation notes after acceptance testing.</p><span className="coming-soon">DOWNLOADS NOT AVAILABLE YET</span></section></>}
     {route === '/dashboard/diagnostics' && <><PortalHeading eyebrow="DIAGNOSTICS" title="System status" description="Non-secret health information for your account and development API." /><div className="dashboard-grid"><article className="panel"><h3>Protected account API</h3><div className={'api-state api-' + apiResult.status}><i />{apiResult.status}</div><p className="panel-copy">{apiResult.message}</p></article><article className="panel"><h3>Development service</h3><div className={'api-state ' + (health?.status === 'ok' ? 'api-ok' : 'api-error')}><i />{health?.status === 'ok' ? 'Online' : 'Unknown'}</div><p className="panel-copy">{statusMessage}</p>{health && <><div className="detail-row"><span>Auth configured</span><span>{health.authConfigured ? 'Yes' : 'No'}</span></div><div className="detail-row"><span>Database configured</span><span>{health.databaseConfigured ? 'Yes' : 'No'}</span></div></>}</article></div></>}
-    {route === '/dashboard/docs' && <><PortalHeading eyebrow="DOCUMENTATION" title="Guides for your setup" description="Guides expand as the clients, connectors, and pairing are implemented." /><div className="docs-grid"><article className="panel"><h3>Account and privacy</h3><p className="panel-copy">Managed sign-in, account-scoped data, and the separation between website preferences and in-game settings.</p><a className="text-link" href="https://github.com/Chriser1234435/RiftPulse/blob/step-6-preview/docs/STEP4_DATABASE_REPORT.md" target="_blank" rel="noreferrer">Read data and security notes â†—</a></article><article className="panel"><h3>Installation guides</h3><p className="panel-copy">Published alongside verified PCVR and Quest builds.</p><span className="coming-soon">IN PREPARATION</span></article><article className="panel"><h3>Platform connections</h3><p className="panel-copy">OAuth instructions appear when each connector is ready.</p><span className="coming-soon">IN PREPARATION</span></article></div></>}
+    {route === '/dashboard/docs' && <><PortalHeading eyebrow="DOCUMENTATION" title="Guides for your setup" description="Guides expand as the clients, connectors, and pairing are implemented." /><div className="docs-grid"><article className="panel"><h3>Account and privacy</h3><p className="panel-copy">Managed sign-in, account-scoped data, and the separation between website preferences and in-game settings.</p><a className="text-link" href="https://github.com/Chriser1234435/RiftPulse/blob/step-6-preview/docs/STEP4_DATABASE_REPORT.md" target="_blank" rel="noreferrer">Read data and security notes <ArrowUpRight aria-hidden="true" /></a></article><article className="panel"><h3>Installation guides</h3><p className="panel-copy">Published alongside verified PCVR and Quest builds.</p><span className="coming-soon">IN PREPARATION</span></article><article className="panel"><h3>Platform connections</h3><p className="panel-copy">OAuth instructions appear when each connector is ready.</p><span className="coming-soon">IN PREPARATION</span></article></div></>}
     {statusMessage && <p className="portal-status" role="status">{statusMessage}</p>}
   </main>
 }

@@ -94,7 +94,7 @@ function Home() {
         <div className="section-heading">
           <span className="eyebrow">THE TOOLKIT</span>
           <h2>More stream. Less friction.</h2>
-          <p>Designed around the things that make a Beat Saber stream feel alive â€” and the community watching it.</p>
+          <p>Designed around the things that make a Beat Saber stream feel alive — and the community watching it.</p>
         </div>
         <div className="feature-grid">
           {features.map((feature) => (
@@ -213,7 +213,7 @@ function Dashboard() {
   const { isLoaded, isSignedIn, getToken } = useAuth()
   const { user } = useUser()
   const location = useLocation()
-  const [apiResult, setApiResult] = useState<ApiResult>({ status: 'loading', message: 'Checking the protected APIâ€¦' })
+  const [apiResult, setApiResult] = useState<ApiResult>({ status: 'loading', message: 'Checking the protected API…' })
   const [connections, setConnections] = useState<PlatformConnection[]>([])
   const [installations, setInstallations] = useState<Installation[]>([])
   const [preferences, setPreferences] = useState<WebPreferences>({ locale: 'en', productUpdates: false })
@@ -267,7 +267,7 @@ function Dashboard() {
     return () => { cancelled = true }
   }, [apiFetch, isLoaded, isSignedIn, location.pathname])
 
-  if (!isLoaded) return <main className="loading-state">Loading your accountâ€¦</main>
+  if (!isLoaded) return <main className="loading-state">Loading your account…</main>
   if (!isSignedIn) return <Navigate to="/sign-in" replace />
   const displayName = user?.firstName || user?.username || 'there'
   const email = user?.primaryEmailAddress?.emailAddress ?? 'Email not available'
@@ -280,7 +280,7 @@ function Dashboard() {
     finally { setSaving(false) }
   }
   async function createInstallation(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault(); setStatusMessage('Creating pending installationâ€¦')
+    event.preventDefault(); setStatusMessage('Creating pending installation…')
     try {
       const body = await apiFetch('/api/installations', { method: 'POST', body: JSON.stringify({ clientPlatform: installPlatform, displayName: installName.trim() }) })
       setInstallations(current => [body.installation, ...current]); setInstallName('')
@@ -316,7 +316,7 @@ function Dashboard() {
     </>}
     {route === '/dashboard/preferences' && <>
       <PortalHeading eyebrow="WEB PREFERENCES" title="Make RiftPulse yours" description="These affect the website only. Gameplay module settings remain in the in-game Settings tab." />
-      <section className="panel preferences-panel"><label className="preference-field">Website language<select value={preferences.locale ?? 'en'} onChange={event => setPreferences(current => ({ ...current, locale: event.target.value }))}><option value="en">English</option><option value="es">EspaÃ±ol</option><option value="fr">FranÃ§ais</option><option value="de">Deutsch</option></select><small>Saved preference only; full translations may be added later.</small></label><label className="preference-toggle"><span><strong>Product updates</strong><small>Save your interest in product announcements when that service is available.</small></span><input type="checkbox" checked={preferences.productUpdates === true} onChange={event => setPreferences(current => ({ ...current, productUpdates: event.target.checked }))} /></label><button className="button" disabled={saving} type="button" onClick={() => void savePreferences()}>{saving ? 'Savingâ€¦' : 'Save preferences'}</button></section>
+      <section className="panel preferences-panel"><label className="preference-field">Website language<select value={preferences.locale ?? 'en'} onChange={event => setPreferences(current => ({ ...current, locale: event.target.value }))}><option value="en">English</option><option value="es">Español</option><option value="fr">Français</option><option value="de">Deutsch</option></select><small>Saved preference only; full translations may be added later.</small></label><label className="preference-toggle"><span><strong>Product updates</strong><small>Save your interest in product announcements when that service is available.</small></span><input type="checkbox" checked={preferences.productUpdates === true} onChange={event => setPreferences(current => ({ ...current, productUpdates: event.target.checked }))} /></label><button className="button" disabled={saving} type="button" onClick={() => void savePreferences()}>{saving ? 'Savingâ€¦' : 'Save preferences'}</button></section>
     </>}
     {route === '/dashboard/downloads' && <><PortalHeading eyebrow="DOWNLOADS" title="Your RiftPulse builds" description="Download links will appear here when signed and tested artifacts are published." /><section className="panel empty-state"><h3>No public builds are published yet</h3><p>PCVR and Quest artifacts will list version, supported game/client version, checksum, and installation notes after acceptance testing.</p><span className="coming-soon">DOWNLOADS NOT AVAILABLE YET</span></section></>}
     {route === '/dashboard/diagnostics' && <><PortalHeading eyebrow="DIAGNOSTICS" title="System status" description="Non-secret health information for your account and development API." /><div className="dashboard-grid"><article className="panel"><h3>Protected account API</h3><div className={'api-state api-' + apiResult.status}><i />{apiResult.status}</div><p className="panel-copy">{apiResult.message}</p></article><article className="panel"><h3>Development service</h3><div className={'api-state ' + (health?.status === 'ok' ? 'api-ok' : 'api-error')}><i />{health?.status === 'ok' ? 'Online' : 'Unknown'}</div><p className="panel-copy">{statusMessage}</p>{health && <><div className="detail-row"><span>Auth configured</span><span>{health.authConfigured ? 'Yes' : 'No'}</span></div><div className="detail-row"><span>Database configured</span><span>{health.databaseConfigured ? 'Yes' : 'No'}</span></div></>}</article></div></>}
@@ -326,7 +326,7 @@ function Dashboard() {
 }
 
 function NotFound() {
-  return <main className="not-found"><span className="eyebrow">404 Â· NOT FOUND</span><h1>Wrong turn.</h1><p>The page youâ€™re looking for isnâ€™t here.</p><Link className="button" to="/">Back to RiftPulse</Link></main>
+  return <main className="not-found"><span className="eyebrow">404 — NOT FOUND</span><h1>Wrong turn.</h1><p>The page you're looking for isn't here.</p><Link className="button" to="/">Back to RiftPulse</Link></main>
 }
 
 function App() {
@@ -343,7 +343,7 @@ function App() {
       <footer className="site-footer">
         <Brand />
         <span>Built for the moment your stream meets the game.</span>
-        <span>Â© {currentYear} RiftPulse</span>
+        <span>© {currentYear} RiftPulse</span>
       </footer>
     </div>
   )
